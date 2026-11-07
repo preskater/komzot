@@ -25,7 +25,7 @@ npm run dev
 .
 ├── apps/
 │   ├── web/       # Next.js 16 (App Router, TypeScript)
-│   └── mobile/    # Expo SDK 58 (Expo Router, TypeScript)
+│   └── mobile/    # Expo SDK 58 (Expo Router, TypeScript; iOS and Android only)
 ├── packages/
 │   ├── eslint-config/      # Shared flat ESLint configs
 │   ├── typescript-config/  # Shared tsconfig presets
@@ -73,6 +73,7 @@ Metro picks `.native.tsx` for native builds, while Next.js resolves `.tsx`. Web 
 
 ## Notes
 
+- The Expo app targets iOS and Android only. Web is served by the Next.js app; `web` is omitted from the mobile app's `platforms` array, and web-only dependencies and files have been removed.
 - Expo SDK 52+ automatically configures Metro for npm workspaces, so there is no manual `watchFolders` setup.
-- Both apps pin React and React DOM to `19.3.0`, the version bundled with Expo SDK 58, to avoid duplicate React copies. Keep these versions aligned when upgrading.
+- Both apps pin React to `19.3.0`, the version bundled with Expo SDK 58, to avoid duplicate React copies. Keep these versions aligned when upgrading.
 - Mobile production builds are handled by EAS (`eas build`), so the mobile app intentionally has no Turbo `build` task.
