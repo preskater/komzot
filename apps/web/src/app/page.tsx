@@ -1,11 +1,6 @@
-"use client";
-
 import { Button } from "@komzot/ui";
-import { useState } from "react";
 
 export default function Home() {
-  const [count, setCount] = useState(0);
-
   return (
     <main
       style={{
@@ -20,14 +15,8 @@ export default function Home() {
         textAlign: "center",
       }}
     >
-      <h1 style={{ fontSize: 40, fontWeight: 700, margin: 0 }}>KomZot Web</h1>
-      <p style={{ margin: 0, opacity: 0.7 }}>
-        This button comes from the shared <code>@komzot/ui</code> package.
-      </p>
-      <Button
-        label={`Clicked ${count} ${count === 1 ? "time" : "times"}`}
-        onPress={() => setCount((value) => value + 1)}
-      />
+      <h1 style={{ fontSize: 40, fontWeight: 700, margin: 0 }}>KomZot</h1>
+      <Button label="Shared @komzot/ui button" />
     </main>
   );
 }
