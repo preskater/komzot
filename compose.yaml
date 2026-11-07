@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:18.6-alpine3.24
+    container_name: komzot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: komzot
+      POSTGRES_PASSWORD: komzot
+      POSTGRES_DB: komzot
+    ports:
+      - "5432:5432"
+    volumes:
+      - komzot-postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U komzot -d komzot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  komzot-postgres-data:

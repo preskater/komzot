@@ -8,6 +8,8 @@ Next.js 16 App Router application with TypeScript.
 - React 19.3
 - TypeScript
 - Shared components from `@komzot/ui`
+- Postgres + Prisma via `@komzot/db`
+- Better Auth via `@komzot/auth`
 - Vitest + React Testing Library for unit and component tests
 - Playwright for end-to-end tests
 
@@ -51,6 +53,39 @@ npm run test:web
 npm run test:e2e
 ```
 
+## Authentication
+
+Better Auth is mounted at `/api/auth/[...all]` through `toNextJsHandler`. The server instance comes from `@komzot/auth/server` via the `server-only` wrapper in `src/lib/auth.ts`.
+
+Pages:
+
+- `/sign-in` — email/password sign-in
+- `/sign-up` — account creation
+- `/` — session status with sign-in/sign-up links or email + sign-out
+
+The home page uses a client-side session status component. After sign-up, Better Auth creates the session and the app redirects home.
+
+Verify the route:
+
+```sh
+curl http://localhost:3000/api/auth/ok
+```
+
+Expected response: `{"ok":true}`.
+
+## Database
+
+The database is managed from the repository root:
+
+```sh
+npm run db:up
+npm run db:generate
+npm run db:migrate
+npm run db:migrate:deploy
+```
+
+See [packages/db/README.md](../../packages/db/README.md) for schema and migration details.
+
 ## Testing
 
 Unit and component tests use Vitest, React Testing Library, and jsdom. The config is in `vitest.config.mts`, with setup in `vitest.setup.ts`.
@@ -60,7 +95,7 @@ npm run test
 npm run test:coverage
 ```
 
-End-to-end tests use Playwright from `e2e/`. The config starts the dev server locally and the production server in CI.
+End-to-end tests use Playwright from `e2e/`. They cover the home page and the full auth flow: sign up, sign out, and sign in. The config starts the dev server locally and the production server in CI.
 
 Install the browser once:
 
@@ -80,11 +115,19 @@ Components come from the source-only `@komzot/ui` workspace package:
 import { Button } from "@komzot/ui";
 ```
 
-`next.config.ts` includes `@komzot/ui` in `transpilePackages` so Turbopack compiles the shared TypeScript source.
+`next.config.ts` includes `@komzot/ui`, `@komzot/auth`, and `@komzot/db` in `transpilePackages` so Turbopack compiles the shared TypeScript source.
 
 ## Environment
 
-Use `NEXT_PUBLIC_*` variables for values exposed to the browser. Local env files are ignored by git.
+Database and auth settings live in the root `.env`:
+
+```env
+DATABASE_URL="postgresql://komzot:komzot@localhost:5432/komzot?schema=public"
+BETTER_AUTH_SECRET="<openssl rand -base64 32>"
+BETTER_AUTH_URL="http://localhost:3000"
+```
+
+`next.config.ts` loads that file explicitly. Use `NEXT_PUBLIC_*` variables for additional values exposed to the browser. Local env files are ignored by git.
 
 ## Notes
 
@@ -96,4 +139,6 @@ Use `NEXT_PUBLIC_*` variables for values exposed to the browser. Local env files
 
 - [Root README](../../README.md)
 - [Shared UI](../../packages/ui/README.md)
+- [Database](../../packages/db/README.md)
+- [Auth](../../packages/auth/README.md)
 - [Web Storybook](../storybook/README.md)

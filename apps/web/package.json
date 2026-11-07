@@ -19,7 +19,11 @@
     "@komzot/ui": "*",
     "next": "16.4.5",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "@komzot/auth": "*",
+    "better-auth": "1.7.18",
+    "dotenv": "^18.0.9",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@komzot/eslint-config": "*",

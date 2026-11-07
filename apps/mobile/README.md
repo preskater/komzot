@@ -9,6 +9,7 @@ Expo SDK 58 application with Expo Router. It targets **iOS and Android only**; w
 - React Native 0.88
 - React 19.3
 - Shared components from `@komzot/ui`
+- Better Auth Expo client with SecureStore
 - Jest + `jest-expo` + React Native Testing Library
 - React Native Storybook
 
@@ -65,6 +66,31 @@ npm run storybook:android
 npm run test:mobile
 ```
 
+## Authentication
+
+The Expo auth client is in `src/lib/auth-client.ts` and uses:
+
+- `better-auth/react`
+- `@better-auth/expo/client`
+- `expo-secure-store` for session and cookie storage
+- `EXPO_PUBLIC_API_URL` as the API base URL
+
+Screens:
+
+- `/sign-in` — email/password sign-in
+- `/sign-up` — account creation
+- `/` — session status with sign-in/sign-up links or email + sign-out
+
+The app scheme is `komzot`, which Better Auth trusts for deep-link callbacks. In development, the server also trusts Expo development origins.
+
+For the API URL:
+
+- iOS simulator: `http://localhost:3000`
+- Android emulator: `http://10.0.2.2:3000`
+- Physical device: `http://<your-lan-ip>:3000`
+
+See [packages/auth/README.md](../../packages/auth/README.md) for server configuration and the auth schema workflow.
+
 ## Storybook
 
 React Native Storybook is bundled only when `EXPO_PUBLIC_STORYBOOK_ENABLED=true`, which the `storybook:*` scripts set.
@@ -88,7 +114,7 @@ npm run test
 npm run test:coverage
 ```
 
-The root layout and Storybook route are excluded from the default coverage report.
+The home screen tests mock the Expo auth client and router to cover signed-out and signed-in states. The root layout and Storybook route are excluded from the default coverage report.
 
 ## Shared UI
 
@@ -101,6 +127,12 @@ import { Button } from "@komzot/ui";
 Metro resolves `button.native.tsx` for iOS and Android. Expo SDK 52+ automatically configures Metro for npm workspaces, so no manual `watchFolders` setup is required.
 
 ## Environment
+
+Create `apps/mobile/.env.local` from `apps/mobile/.env.example`:
+
+```env
+EXPO_PUBLIC_API_URL="http://localhost:3000"
+```
 
 Use `EXPO_PUBLIC_*` variables for values exposed to the app bundle. `EXPO_PUBLIC_STORYBOOK_ENABLED` is the switch for Storybook.
 
@@ -123,4 +155,6 @@ The mobile app intentionally has no Turbo `build` task.
 
 - [Root README](../../README.md)
 - [Shared UI](../../packages/ui/README.md)
+- [Auth](../../packages/auth/README.md)
+- [Database](../../packages/db/README.md)
 - [Web Storybook](../storybook/README.md)

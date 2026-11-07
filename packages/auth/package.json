@@ -1,0 +1,41 @@
+{
+  "name": "@komzot/auth",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./server": {
+      "types": "./src/server.ts",
+      "default": "./src/server.ts"
+    },
+    "./client": {
+      "types": "./src/client.ts",
+      "default": "./src/client.ts"
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "@better-auth/expo": "1.7.18",
+    "@komzot/db": "*",
+    "better-auth": "1.7.18"
+  },
+  "peerDependencies": {
+    "next": "^16.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@komzot/eslint-config": "*",
+    "@komzot/typescript-config": "*",
+    "@types/node": "^22.0.0",
+    "@types/react": "~19.3.0",
+    "eslint": "^9.0.0",
+    "next": "16.4.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "~6.0.3"
+  },
+  "type": "module"
+}

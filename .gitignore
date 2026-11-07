@@ -7,6 +7,7 @@ out/
 dist/
 build/
 web-build/
+packages/db/src/generated/
 
 # turbo
 .turbo/

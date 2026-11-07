@@ -1,7 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import Page from "./page";
+
+vi.mock("@/components/auth-status", () => ({
+  AuthStatus: () => <span>Auth status</span>,
+}));
 
 test("renders the KomZot home page", () => {
   render(<Page />);

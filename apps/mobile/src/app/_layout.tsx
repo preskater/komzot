@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 const storybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true';
 
 export const unstable_settings = {
-  initialRouteName: storybookEnabled ? '(storybook)/index' : '(pages)/index',
+  anchor: storybookEnabled ? '(storybook)/index' : '(pages)/index',
 };
 
 export default function RootLayout() {
@@ -15,6 +15,8 @@ export default function RootLayout() {
           <Stack.Screen name="(storybook)/index" />
         </Stack.Protected>
         <Stack.Screen name="(pages)/index" />
+        <Stack.Screen name="(pages)/sign-in" />
+        <Stack.Screen name="(pages)/sign-up" />
       </Stack>
       <StatusBar style="auto" />
     </>
