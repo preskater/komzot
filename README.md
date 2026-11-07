@@ -4,7 +4,7 @@ A Turborepo monorepo with a Next.js web app and an Expo mobile app sharing a sma
 
 ## Requirements
 
-- Node.js >= 20.9
+- Node.js >= 22.12
 - npm 11
 
 ## Getting started
@@ -49,6 +49,12 @@ npm run dev
 | `npm run storybook:android` | Run React Native Storybook on Android |
 | `npm run build` | Build the web app and web Storybook |
 | `npm run build:storybook` | Build only the web Storybook |
+| `npm run test` | Run mobile, web, and Storybook tests |
+| `npm run test:web` | Run web unit tests |
+| `npm run test:mobile` | Run mobile Jest tests |
+| `npm run test:storybook` | Run Storybook component tests |
+| `npm run test:coverage` | Run all unit/component tests with coverage |
+| `npm run test:e2e` | Run Playwright end-to-end tests |
 | `npm run lint` | Lint every package |
 | `npm run typecheck` | Type-check every package |
 | `npm run clean` | Remove generated caches and build output |
@@ -88,6 +94,40 @@ Stories are co-located with the shared components in `packages/ui`:
 Web Storybook uses `@storybook/react-vite` and is part of `turbo dev` and `turbo build`. Its static output is written to `apps/storybook/storybook-static`, which is cached by Turbo and gitignored.
 
 React Native Storybook is included in the Expo bundle only when `EXPO_PUBLIC_STORYBOOK_ENABLED=true`. Use the `storybook:*` scripts to launch it; the normal app is unaffected.
+
+## Testing
+
+- **Mobile** — Jest + `jest-expo` + React Native Testing Library, under `apps/mobile/__tests__`.
+- **Web** — Vitest + React Testing Library + jsdom, with `apps/web/vitest.config.mts`.
+- **Storybook** — `@storybook/addon-vitest` runs the web stories, including interaction `play` functions, in Chromium via Playwright.
+- **E2E** — Playwright runs the Next.js app through `apps/web/playwright.config.ts`.
+
+Install the Playwright browser once:
+
+```sh
+npx playwright install chromium
+```
+
+Run tests:
+
+```sh
+npm run test            # mobile + web + Storybook
+npm run test:mobile
+npm run test:web
+npm run test:storybook
+npm run test:coverage
+npm run test:e2e
+```
+
+Watch mode is available per package:
+
+```sh
+npm run test:watch -w apps/mobile
+npm run test:watch -w apps/web
+npm run test:watch -w @komzot/storybook
+```
+
+The GitHub Actions workflow in `.github/workflows/ci.yml` caches `.turbo` between runs and executes lint, typecheck, build, unit/component tests, and E2E tests.
 
 ## Notes
 

@@ -34,8 +34,13 @@
   "devDependencies": {
     "@komzot/eslint-config": "*",
     "@komzot/typescript-config": "*",
+    "@testing-library/react-native": "^14.1.0",
+    "@types/jest": "30.0.0",
+    "@types/node": "^22.0.0",
     "@types/react": "~19.3.0",
     "eslint": "^9.0.0",
+    "jest": "~30.5.2",
+    "jest-expo": "~58.0.14",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -48,7 +53,25 @@
     "storybook:android": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED=true expo start --android",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .expo"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "rm -rf .expo coverage"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg|@komzot/.*)"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/app/_layout.tsx",
+      "!**/*.stories.{ts,tsx}"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/app/\\(storybook\\)/"
+    ]
   },
   "private": true
 }

@@ -24,6 +24,9 @@ apps/mobile/android/
 
 # testing
 coverage/
+playwright-report/
+blob-report/
+test-results/
 
 # env
 .env*

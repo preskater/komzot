@@ -18,6 +18,12 @@
     "storybook:android": "npm run storybook:android -w apps/mobile",
     "build": "turbo run build build:storybook",
     "build:storybook": "turbo run build:storybook",
+    "test": "turbo run test",
+    "test:web": "turbo run test --filter=web",
+    "test:mobile": "turbo run test --filter=mobile",
+    "test:storybook": "turbo run test --filter=@komzot/storybook",
+    "test:coverage": "turbo run test:coverage",
+    "test:e2e": "npm run test:e2e -w apps/web",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean"
@@ -31,6 +37,6 @@
     "react-native-svg": "15.16.0"
   },
   "engines": {
-    "node": ">=20.9.0"
+    "node": ">=22.12.0"
   }
 }

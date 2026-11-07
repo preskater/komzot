@@ -8,7 +8,12 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .next"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "clean": "rm -rf .next coverage playwright-report test-results"
   },
   "dependencies": {
     "@komzot/ui": "*",
@@ -19,11 +24,19 @@
   "devDependencies": {
     "@komzot/eslint-config": "*",
     "@komzot/typescript-config": "*",
-    "@types/node": "^20",
+    "@playwright/test": "^1.65.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^22.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.2.1",
+    "@vitest/coverage-v8": "^5.1.0",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9.0.0",
-    "typescript": "^5"
+    "jsdom": "^26.1.0",
+    "typescript": "^5",
+    "vitest": "^5.1.0"
   }
 }

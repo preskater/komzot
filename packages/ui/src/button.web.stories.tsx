@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn } from "storybook/test";
 
 import { Button } from "./button";
 
 const meta = {
   title: "Button",
   component: Button,
-  tags: ["autodocs"],
+  tags: ["autodocs", "test"],
   args: {
     label: "Button",
+    onPress: fn(),
   },
 } satisfies Meta<typeof Button>;
 
@@ -19,5 +21,13 @@ export const Default: Story = {};
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+export const Clicks: Story = {
+  play: async ({ args, canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Button" }));
+
+    await expect(args.onPress).toHaveBeenCalledOnce();
   },
 };
