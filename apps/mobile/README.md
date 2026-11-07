@@ -1,4 +1,4 @@
-# Komzot mobile
+# KomZot mobile
 
 Expo SDK 58 app using [Expo Router](https://docs.expo.dev/router/introduction/). It targets **iOS and Android only** — the web app lives in `apps/web`.
 

@@ -20,7 +20,7 @@ export default function Home() {
         textAlign: "center",
       }}
     >
-      <h1 style={{ fontSize: 40, fontWeight: 700, margin: 0 }}>Komzot Web</h1>
+      <h1 style={{ fontSize: 40, fontWeight: 700, margin: 0 }}>KomZot Web</h1>
       <p style={{ margin: 0, opacity: 0.7 }}>
         This button comes from the shared <code>@komzot/ui</code> package.
       </p>

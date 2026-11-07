@@ -1,4 +1,4 @@
-# Komzot
+# KomZot
 
 A Turborepo monorepo with a Next.js web app and an Expo mobile app sharing a small UI package.
 

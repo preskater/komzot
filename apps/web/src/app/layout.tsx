@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Komzot Web",
-  description: "Next.js app in the Komzot monorepo",
+  title: "KomZot Web",
+  description: "Next.js app in the KomZot monorepo",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
