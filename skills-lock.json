@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "component-docs": {
+      "source": "storybookjs/storybook",
+      "sourceType": "github",
+      "skillPath": "code/lib/claude-plugin/skills/component-docs/SKILL.md",
+      "computedHash": "4eefa7056b87ca55e82ef7ad7f7168a6ec61c3b2f34d5da5441215dacd18634d"
+    },
     "eas-app-stores": {
       "source": "expo/skills",
       "sourceType": "github",
@@ -187,11 +193,59 @@
       "skillPath": "skills/next-partial-prefetching-optimizer/SKILL.md",
       "computedHash": "2fc7448f5eec4e5c4f6e51359e2cd3d9c992566ca90652c8466d64015932b255"
     },
+    "setup-react-native-storybook": {
+      "source": "storybookjs/react-native",
+      "sourceType": "github",
+      "skillPath": "skills/setup-react-native-storybook/SKILL.md",
+      "computedHash": "c991e2752c560169cd632c0b18a00518e3f57a4514e35d9f3ed905bd9bd1efbc"
+    },
+    "storybook-init": {
+      "source": "storybookjs/storybook",
+      "sourceType": "github",
+      "skillPath": "code/lib/claude-plugin/skills/storybook-init/SKILL.md",
+      "computedHash": "807db4b2fccc1396ad0cacafadeb01abedb934e8261d282c603c80c8b4e5b13c"
+    },
+    "storybook-setup": {
+      "source": "storybookjs/storybook",
+      "sourceType": "github",
+      "skillPath": "code/lib/claude-plugin/skills/storybook-setup/SKILL.md",
+      "computedHash": "a85f564bbcacc862e1e302eabc5d3519e466e4f86eaddf7ec8e58f784f51aeb6"
+    },
+    "storybook-upgrade": {
+      "source": "storybookjs/storybook",
+      "sourceType": "github",
+      "skillPath": "code/lib/claude-plugin/skills/storybook-upgrade/SKILL.md",
+      "computedHash": "c327a9171dee8637df4cc62b015f4584f6b1a9dc6b49efde69d0300a6a131fe1"
+    },
     "turborepo": {
       "source": "vercel/turborepo",
       "sourceType": "github",
       "skillPath": "skills/turborepo/SKILL.md",
       "computedHash": "c83a6ff75c62092f71da91408164ed3426f11749b032fd23ecc855e27c2fb538"
+    },
+    "ui-workflow": {
+      "source": "storybookjs/storybook",
+      "sourceType": "github",
+      "skillPath": "code/lib/claude-plugin/skills/ui-workflow/SKILL.md",
+      "computedHash": "456b59f439444b38f042455c49f15b97e9e06c1c22cfe5a7a7948eecba9fa6c3"
+    },
+    "update-browser-support": {
+      "source": "storybookjs/storybook",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/update-browser-support/SKILL.md",
+      "computedHash": "d64a9858da173d716feca88bd99a605612bf000fc3e2eebaadcc5cd92237e0ef"
+    },
+    "upgrading-react-native-storybook": {
+      "source": "storybookjs/react-native",
+      "sourceType": "github",
+      "skillPath": "skills/upgrading-react-native-storybook/SKILL.md",
+      "computedHash": "12dbaaa4b8c492d0b846668483f544eba69b4c7fa252fb73781a4f642cba34a7"
+    },
+    "writing-react-native-storybook-stories": {
+      "source": "storybookjs/react-native",
+      "sourceType": "github",
+      "skillPath": "skills/writing-react-native-storybook-stories/SKILL.md",
+      "computedHash": "c174f3d3b2cb5c242da800403b231882742764adb4f78dc825918edcd755db74"
     }
   }
 }

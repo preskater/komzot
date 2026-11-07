@@ -1,0 +1,8 @@
+{
+  "extends": "@komzot/typescript-config/react-vite.json",
+  "compilerOptions": {
+    "types": ["vite/client", "node"]
+  },
+  "include": [".storybook/**/*.ts"],
+  "exclude": ["node_modules", "storybook-static"]
+}

@@ -11,6 +11,10 @@ web-build/
 # turbo
 .turbo/
 
+# storybook
+storybook-static/
+debug-storybook.log
+
 # expo
 .expo/
 .metro-health-check*

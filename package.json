@@ -11,13 +11,24 @@
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "dev:mobile": "turbo run dev --filter=mobile",
-    "build": "turbo run build",
+    "dev:storybook": "turbo run dev --filter=@komzot/storybook",
+    "storybook:web": "npm run dev -w @komzot/storybook",
+    "storybook:mobile": "npm run storybook -w apps/mobile",
+    "storybook:ios": "npm run storybook:ios -w apps/mobile",
+    "storybook:android": "npm run storybook:android -w apps/mobile",
+    "build": "turbo run build build:storybook",
+    "build:storybook": "turbo run build:storybook",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean"
   },
   "devDependencies": {
     "turbo": "^2.11.10"
+  },
+  "overrides": {
+    "@react-native-community/datetimepicker": "9.2.1",
+    "@react-native-community/slider": "5.2.1",
+    "react-native-svg": "15.16.0"
   },
   "engines": {
     "node": ">=20.9.0"

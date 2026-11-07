@@ -14,10 +14,11 @@ npm install
 npm run dev
 ```
 
-`npm run dev` starts both apps:
+`npm run dev` starts all development servers:
 
 - Web: http://localhost:3000
 - Expo: http://localhost:8081 (Metro bundler)
+- Web Storybook: http://localhost:6006
 
 ## Structure
 
@@ -25,11 +26,12 @@ npm run dev
 .
 ├── apps/
 │   ├── web/       # Next.js 16 (App Router, TypeScript)
-│   └── mobile/    # Expo SDK 58 (Expo Router, TypeScript; iOS and Android only)
+│   ├── mobile/    # Expo SDK 58 (Expo Router, TypeScript; iOS and Android only)
+│   └── storybook/ # React + Vite Storybook for the shared web components
 ├── packages/
 │   ├── eslint-config/      # Shared flat ESLint configs
 │   ├── typescript-config/  # Shared tsconfig presets
-│   └── ui/                 # Shared cross-platform React components
+│   └── ui/                 # Shared cross-platform React components and stories
 ├── package.json
 └── turbo.json
 ```
@@ -38,10 +40,15 @@ npm run dev
 
 | Command | Description |
 | --- | --- |
-| `npm run dev` | Run every app in development with Turbo |
+| `npm run dev` | Run the web app, mobile app, and web Storybook |
 | `npm run dev:web` | Run only the web app |
 | `npm run dev:mobile` | Run only the mobile app |
-| `npm run build` | Build every package that has a build task (web) |
+| `npm run dev:storybook` | Run only the web Storybook |
+| `npm run storybook:mobile` | Run React Native Storybook in Expo |
+| `npm run storybook:ios` | Run React Native Storybook on iOS |
+| `npm run storybook:android` | Run React Native Storybook on Android |
+| `npm run build` | Build the web app and web Storybook |
+| `npm run build:storybook` | Build only the web Storybook |
 | `npm run lint` | Lint every package |
 | `npm run typecheck` | Type-check every package |
 | `npm run clean` | Remove generated caches and build output |
@@ -71,9 +78,21 @@ Platform-specific implementations use React Native's file extensions:
 
 Metro picks `.native.tsx` for native builds, while Next.js resolves `.tsx`. Web builds transpile the package via `transpilePackages` in `apps/web/next.config.ts`.
 
+## Storybook
+
+Stories are co-located with the shared components in `packages/ui`:
+
+- `*.web.stories.tsx` — used by the web Storybook in `apps/storybook`
+- `*.native.stories.tsx` — used by React Native Storybook in `apps/mobile`
+
+Web Storybook uses `@storybook/react-vite` and is part of `turbo dev` and `turbo build`. Its static output is written to `apps/storybook/storybook-static`, which is cached by Turbo and gitignored.
+
+React Native Storybook is included in the Expo bundle only when `EXPO_PUBLIC_STORYBOOK_ENABLED=true`. Use the `storybook:*` scripts to launch it; the normal app is unaffected.
+
 ## Notes
 
 - The Expo app targets iOS and Android only. Web is served by the Next.js app; `web` is omitted from the mobile app's `platforms` array, and web-only dependencies and files have been removed.
 - Expo SDK 52+ automatically configures Metro for npm workspaces, so there is no manual `watchFolders` setup.
 - Both apps pin React to `19.3.0`, the version bundled with Expo SDK 58, to avoid duplicate React copies. Keep these versions aligned when upgrading.
 - Mobile production builds are handled by EAS (`eas build`), so the mobile app intentionally has no Turbo `build` task.
+- Story changes are excluded from the production `build` task inputs, so editing a story only invalidates the Storybook build.
