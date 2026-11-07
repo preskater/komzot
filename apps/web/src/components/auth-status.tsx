@@ -1,14 +1,8 @@
 "use client";
 
 import { authClient } from "@komzot/auth/client";
-import Link from "next/link";
+import { TextLink } from "@komzot/ui";
 import { useRouter } from "next/navigation";
-
-const linkStyle = {
-  color: "inherit",
-  fontWeight: 600,
-  textDecoration: "underline",
-} as const;
 
 export function AuthStatus() {
   const router = useRouter();
@@ -21,12 +15,8 @@ export function AuthStatus() {
   if (!session) {
     return (
       <nav style={{ display: "flex", fontSize: 14, gap: 16 }}>
-        <Link href="/sign-in" style={linkStyle}>
-          Sign in
-        </Link>
-        <Link href="/sign-up" style={linkStyle}>
-          Sign up
-        </Link>
+        <TextLink onPress={() => router.push("/sign-in")}>Sign in</TextLink>
+        <TextLink onPress={() => router.push("/sign-up")}>Sign up</TextLink>
       </nav>
     );
   }
@@ -34,24 +24,14 @@ export function AuthStatus() {
   return (
     <div style={{ alignItems: "center", display: "flex", fontSize: 14, gap: 16 }}>
       <span>{session.user.email}</span>
-      <button
-        onClick={async () => {
+      <TextLink
+        onPress={async () => {
           await authClient.signOut();
           router.refresh();
         }}
-        style={{
-          background: "none",
-          border: "none",
-          color: "inherit",
-          cursor: "pointer",
-          font: "inherit",
-          padding: 0,
-          textDecoration: "underline",
-        }}
-        type="button"
       >
         Sign out
-      </button>
+      </TextLink>
     </div>
   );
 }

@@ -20,4 +20,22 @@ describe('<Button />', () => {
 
     expect(onPress).not.toHaveBeenCalled();
   });
+
+  test('shows the loading label and blocks presses while loading', async () => {
+    const onPress = jest.fn();
+
+    await render(
+      <Button
+        isLoading
+        label="Save"
+        loadingLabel="Saving..."
+        onPress={onPress}
+      />
+    );
+
+    expect(screen.getByText('Saving...')).toBeTruthy();
+    fireEvent.press(screen.getByText('Saving...'));
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
 });

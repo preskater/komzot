@@ -8,7 +8,7 @@ const meta = {
   component: Button,
   decorators: [
     (Story) => (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 24 }}>
         <Story />
       </View>
     ),
@@ -26,5 +26,18 @@ export const Default: Story = {};
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+    loadingLabel: "Saving...",
   },
 };

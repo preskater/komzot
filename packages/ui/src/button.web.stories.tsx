@@ -24,6 +24,19 @@ export const Disabled: Story = {
   },
 };
 
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+    loadingLabel: "Saving...",
+  },
+};
+
 export const Clicks: Story = {
   play: async ({ args, canvas, userEvent }) => {
     await userEvent.click(canvas.getByRole("button", { name: "Button" }));

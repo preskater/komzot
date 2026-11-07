@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 
 import type { ButtonProps } from "./button.types";
 
-const styles: Record<"button" | "disabled", CSSProperties> = {
+const styles: Record<"button" | "disabled" | "fullWidth", CSSProperties> = {
   button: {
     alignItems: "center",
     backgroundColor: "#171717",
@@ -23,17 +23,35 @@ const styles: Record<"button" | "disabled", CSSProperties> = {
     cursor: "not-allowed",
     opacity: 0.5,
   },
+  fullWidth: {
+    width: "100%",
+  },
 };
 
-export function Button({ label, onPress, disabled = false }: ButtonProps) {
+export function Button({
+  label,
+  onPress,
+  disabled = false,
+  fullWidth = false,
+  isLoading = false,
+  loadingLabel,
+  type = "button",
+}: ButtonProps) {
+  const isDisabled = disabled || isLoading;
+
   return (
     <button
-      type="button"
+      aria-busy={isLoading || undefined}
+      disabled={isDisabled}
       onClick={onPress}
-      disabled={disabled}
-      style={disabled ? { ...styles.button, ...styles.disabled } : styles.button}
+      style={{
+        ...styles.button,
+        ...(fullWidth ? styles.fullWidth : null),
+        ...(isDisabled ? styles.disabled : null),
+      }}
+      type={type}
     >
-      {label}
+      {isLoading ? (loadingLabel ?? label) : label}
     </button>
   );
 }

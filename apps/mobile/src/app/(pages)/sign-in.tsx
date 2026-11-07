@@ -1,8 +1,15 @@
-import { Button } from "@komzot/ui";
-import { Link, useRouter } from "expo-router";
+import {
+  AuthCard,
+  AuthScreen,
+  Button,
+  Form,
+  FormError,
+  TextField,
+  TextLink,
+} from "@komzot/ui";
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, Text, View } from "react-native";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -30,87 +37,59 @@ export default function SignInScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Sign in</Text>
-        <Text style={styles.subtitle}>Sign in to your KomZot account.</Text>
+    <AuthScreen>
+      <AuthCard
+        footer={
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>No account?</Text>
+            <TextLink onPress={() => router.push("/sign-up")}>
+              Create one
+            </TextLink>
+          </View>
+        }
+        subtitle="Sign in to your KomZot account."
+        title="Sign in"
+      >
+        <Form>
+          <TextField
+            autoComplete="email"
+            label="Email"
+            onChangeText={setEmail}
+            required
+            type="email"
+            value={email}
+          />
+          <TextField
+            autoComplete="current-password"
+            label="Password"
+            onChangeText={setPassword}
+            required
+            type="password"
+            value={password}
+          />
 
-        <TextInput
-          autoCapitalize="none"
-          autoComplete="email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          placeholder="Email"
-          placeholderTextColor="#888"
-          style={styles.input}
-          value={email}
-        />
-        <TextInput
-          autoComplete="current-password"
-          onChangeText={setPassword}
-          placeholder="Password"
-          placeholderTextColor="#888"
-          secureTextEntry
-          style={styles.input}
-          value={password}
-        />
+          <FormError message={error} />
 
-        {error ? <Text style={styles.error}>{error}</Text> : null}
-
-        <Button
-          disabled={isLoading}
-          label={isLoading ? "Signing in..." : "Sign in"}
-          onPress={handleSignIn}
-        />
-
-        <Text style={styles.footer}>
-          No account?{" "}
-          <Link href="/sign-up" style={styles.link}>
-            Create one
-          </Link>
-        </Text>
-      </View>
-    </SafeAreaView>
+          <Button
+            fullWidth
+            isLoading={isLoading}
+            label="Sign in"
+            loadingLabel="Signing in..."
+            onPress={handleSignIn}
+          />
+        </Form>
+      </AuthCard>
+    </AuthScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    gap: 14,
-    justifyContent: "center",
-    padding: 24,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "700",
-  },
-  subtitle: {
-    color: "#666",
-    fontSize: 15,
-    marginBottom: 8,
-  },
-  input: {
-    borderColor: "#d4d4d4",
-    borderRadius: 8,
-    borderWidth: 1,
-    fontSize: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-  },
-  error: {
-    color: "#b91c1c",
-    fontSize: 14,
-  },
   footer: {
-    color: "#666",
-    fontSize: 14,
+    flexDirection: "row",
+    gap: 4,
   },
-  link: {
-    color: "#171717",
-    fontWeight: "600",
+  footerText: {
+    color: "#666666",
+    fontSize: 14,
   },
 });

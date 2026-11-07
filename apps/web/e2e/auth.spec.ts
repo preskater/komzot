@@ -14,7 +14,7 @@ test("signs up, signs out, and signs in", async ({ page }) => {
   await expect(page.getByText(email)).toBeVisible();
 
   await page.getByRole("button", { name: "Sign out" }).click();
-  await expect(page.getByRole("link", { name: "Sign in" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();
 
   await page.goto("/sign-in");
   await page.getByLabel("Email").fill(email);

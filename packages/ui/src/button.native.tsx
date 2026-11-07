@@ -2,19 +2,32 @@ import { Pressable, StyleSheet, Text } from "react-native";
 
 import type { ButtonProps } from "./button.types";
 
-export function Button({ label, onPress, disabled = false }: ButtonProps) {
+export function Button({
+  label,
+  onPress,
+  disabled = false,
+  fullWidth = false,
+  isLoading = false,
+  loadingLabel,
+}: ButtonProps) {
+  const isDisabled = disabled || isLoading;
+
   return (
     <Pressable
       accessibilityRole="button"
-      disabled={disabled}
+      accessibilityState={{ busy: isLoading, disabled: isDisabled }}
+      disabled={isDisabled}
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
-        pressed && styles.pressed,
-        disabled && styles.disabled,
+        fullWidth && styles.fullWidth,
+        pressed && !isDisabled && styles.pressed,
+        isDisabled && styles.disabled,
       ]}
     >
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label}>
+        {isLoading ? (loadingLabel ?? label) : label}
+      </Text>
     </Pressable>
   );
 }
@@ -27,6 +40,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 16,
     paddingVertical: 10,
+  },
+  fullWidth: {
+    alignSelf: "stretch",
   },
   pressed: {
     opacity: 0.8,
